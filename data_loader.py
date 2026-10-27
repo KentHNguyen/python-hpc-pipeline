@@ -1,13 +1,9 @@
-'''
-This file is where you migrate all the functions that you made in data_process1 and data_process2. 
-'''
 import numpy as np
 import pandas as pd
 import csv
-import time # Import the time module
 from typeguard import typechecked
 
-#data_process1.py methods
+# Loading and normalization (pure Python and NumPy)
 @typechecked
 def load_dataset(filename: str) -> list[list[float]]:
     """
@@ -20,11 +16,6 @@ def load_dataset(filename: str) -> list[list[float]]:
     Returns:
         list[list[float]]: A list of lists, where each inner list represents a row
                            of the dataset with float values.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-
-    Note: If you are stuck on this, I recommend looking through the python csv library.
     """
     GasProperties = []
     with open(filename , newline = '') as f:
@@ -33,8 +24,6 @@ def load_dataset(filename: str) -> list[list[float]]:
         for row in reader:
             GasProperties.append([float(value) for value in row])
     return GasProperties
-
-    raise NotImplementedError()
 
 
 @typechecked
@@ -48,18 +37,12 @@ def load_dataset_np(filename: str) -> np.ndarray:
 
     Returns:
         np.ndarray: A NumPy array representing the dataset.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-    
-    Note: Numpy has a very useful csv file reader called genfromtxt.
     """
 
     GasProperties = np.genfromtxt(filename, delimiter = ',', skip_header = 1)
 
     return GasProperties
 
-    raise NotImplementedError()
 
 @typechecked
 def normalize_array(arr: list[list[float]], out_file: str | None = None) -> int:
@@ -75,12 +58,6 @@ def normalize_array(arr: list[list[float]], out_file: str | None = None) -> int:
 
     Returns:
         int: The number of rows processed after normalization and filtering.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-    
-    Note: Probably the most complicated function to write because you cant use numpy.
-    I would spend some time on this to make sure that all the equations for metrics are correct.
     """
     num_rows = len(arr)
     num_cols = len(arr[0])
@@ -127,7 +104,6 @@ def normalize_array(arr: list[list[float]], out_file: str | None = None) -> int:
 
     return len(result)
 
-    raise NotImplementedError()
 
 @typechecked
 def normalize_array_np(arr: np.ndarray, out_file: str | None = None) -> int:
@@ -143,12 +119,6 @@ def normalize_array_np(arr: np.ndarray, out_file: str | None = None) -> int:
 
     Returns:
         int: The number of rows processed after normalization and filtering.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-
-    Note: The same function as normalize_array but using numpy to calculate the metrics.
-    This function should be almost copy and paste with numpy functions.
     """
 
     num_cols = arr.shape[1] 
@@ -176,11 +146,8 @@ def normalize_array_np(arr: np.ndarray, out_file: str | None = None) -> int:
 
     return result.shape[0]
 
-    raise NotImplementedError()
 
-
-
-#data_process2.py methods
+# Pandas loading and train/test splitting
 @typechecked
 def load_dataset_pd(filename: str) -> pd.DataFrame:
     """
@@ -191,15 +158,8 @@ def load_dataset_pd(filename: str) -> pd.DataFrame:
 
     Returns:
         pd.DataFrame: A Pandas DataFrame containing the loaded data.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-
-    Note: This is a 1-line solution, if you spend more than 10 mins on this, you may be overthinking.
     """
     return pd.read_csv(filename)
-
-    raise NotImplementedError()
 
 
 @typechecked
@@ -215,17 +175,11 @@ def split_xy(df: pd.DataFrame, y_axis: int = -1) -> tuple[np.ndarray, np.ndarray
     Returns:
         tuple[np.ndarray, np.ndarray]: A tuple containing two NumPy arrays:
                                        X (features) and Y (target).
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-    Note: A 2-line solution but can be tricky if you are not familiar with pandas.
     """
-    num_cols = df.shape[1]
     X_data = df.drop(df.columns[y_axis], axis=1).values
     Y_data = df.iloc[:, y_axis].values
     return (X_data, Y_data)
 
-    raise NotImplementedError()
 
 @typechecked
 def split_training_test(
@@ -245,10 +199,6 @@ def split_training_test(
     Returns:
         tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]: A tuple containing four NumPy arrays:
                                                                 X_train, Y_train, X_test, Y_test.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-    Note: If you are stuck, look into list slicing. 
     """
     num_rows = X_data.shape[0]
     cutoff = int(num_rows * split)
@@ -259,5 +209,3 @@ def split_training_test(
     Y_test = Y_data[cutoff:]
 
     return (X_train, Y_train, X_test, Y_test)
-
-    raise NotImplementedError()

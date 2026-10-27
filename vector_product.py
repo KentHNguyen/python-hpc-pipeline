@@ -13,12 +13,6 @@ def dot_product(a: list[float], b: list[float]) -> float:
 
     Returns:
         float: The dot product of the two lists.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-    
-    Note: You can use standard for-loops or list comprehension if you want to be fancy.
-    If you want a challenge, try writing this in 1 line.
     """
     return sum(x * y for x, y in zip(a, b))
 
@@ -34,12 +28,6 @@ def find_largest_dot_product_py(X_data: list[list[float]], Y_data: list[float]) 
 
     Returns:
         int: The index of the row in X_data with the largest dot product.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-
-    Note: I recommend using the dot_product function you wrote above to complete this.
-    The implementation for this function is pretty straightforward.
     """
     best_index = 0
     best_value = dot_product(X_data[0], Y_data)
@@ -63,11 +51,6 @@ def dot_product_np(a: np.ndarray, b: np.ndarray) -> float:
 
     Returns:
         float: The dot product of the two arrays.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-
-    Note: This is a 1-line solution, if you spend more than 10 mins on this, you may be overthinking.
     """
     return float(np.dot(a, b))
 
@@ -83,12 +66,6 @@ def find_largest_dot_product_np(X_data: np.ndarray, Y_data: np.ndarray) -> int:
 
     Returns:
         int: The index of the row in X_data with the largest dot product.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-    
-    Note: This might be a little more tricky to do, the solution itself is pretty short (3 lines) 
-    but finding the right function in numpy might be difficult.
     """
     dot_products = np.dot(X_data, Y_data)
     best_index = np.argmax(dot_products)
@@ -105,11 +82,6 @@ def mat_mul_np(A: np.ndarray, B: np.ndarray) -> np.ndarray:
 
     Returns:
         np.ndarray: The result of the matrix multiplication.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-    
-    Note: This is a 1-line solution, if you spend more than 10 mins on this, you may be overthinking.
     """
     return A @ B
 
@@ -124,19 +96,13 @@ def mat_mul_t(A: t.Tensor, B: t.Tensor) -> t.Tensor:
 
     Returns:
         t.Tensor: The result of the matrix multiplication.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-
-    Note: This is a 1-line solution, if you spend more than 10 mins on this, you may be overthinking.
     """
     
     return A @ B
 
-    raise NotImplementedError()
 
 @typechecked
-def dot_product_t(a: t.Tensor, b: t.Tensor) -> t.tensor:
+def dot_product_t(a: t.Tensor, b: t.Tensor) -> t.Tensor:
     """
     Calculates the dot product of two PyTorch tensors.
 
@@ -146,13 +112,6 @@ def dot_product_t(a: t.Tensor, b: t.Tensor) -> t.tensor:
 
     Returns:
         t.Tensor: The dot product of the two tensors.
-
-    WARNING: Do not modify the type hints (parameter types or return type) of this function,
-             as it will cause the autograder to fail, resulting in minimal credit.
-    
-    Note: This is a 1-line solution, if you spend more than 10 mins on this, you may be overthinking.
     """
 
     return t.dot(a, b)
-
-    raise NotImplementedError()

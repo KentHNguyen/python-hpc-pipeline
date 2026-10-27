@@ -2,15 +2,6 @@ import time
 from data_loader import *
 
 
-if __name__ == "__main__":
-    '''
-    You can write your filled out functions in here to test them out.
-    '''
-
-    
-    from data_loader import *
-import time
-
 
 if __name__ == "__main__":
 
